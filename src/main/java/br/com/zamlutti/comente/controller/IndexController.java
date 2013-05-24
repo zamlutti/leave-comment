@@ -1,6 +1,7 @@
 package main.java.br.com.zamlutti.comente.controller;
 
 import br.com.caelum.vraptor.Path;
+import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 
@@ -16,5 +17,9 @@ public class IndexController {
 	@Path("/")
 	public void index() {
 	}
-
+	
+	@Post
+	public void addRedirect(String title){
+		result.redirectTo(CommentsController.class).add(title);
+	}
 }
