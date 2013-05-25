@@ -19,7 +19,7 @@ public class IndexController {
 	}
 	
 	@Post
-	public void addRedirect(String title){
+	public void add(String title){
 		result.redirectTo(CommentsController.class).add(title);
 	}
 }
