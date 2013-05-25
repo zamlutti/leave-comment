@@ -15,12 +15,12 @@
 		<h1>Comente sobre...</h1>
 	</header>
 	<div class="container">
-		<form class="form-inline" action="${linkTo[IndexController].add}" method="post">
+		<form class="form-inline" action="${linkTo[IndexController].add}"
+			method="post">
 			<fieldset>
 				<legend>Sobre o que você deseja comentar?</legend>
-				<input type="text" name="title" placeholder="Tópico" /> 
-				<input type="submit" class="btn left"
-					value="Comentar" />
+				<input type="text" name="title" placeholder="Tópico" /> <input
+					type="submit" class="btn left" value="Comentar" />
 			</fieldset>
 		</form>
 	</div>

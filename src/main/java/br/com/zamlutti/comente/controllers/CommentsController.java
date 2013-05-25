@@ -1,4 +1,4 @@
-package main.java.br.com.zamlutti.comente.controller;
+package main.java.br.com.zamlutti.comente.controllers;
 
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
