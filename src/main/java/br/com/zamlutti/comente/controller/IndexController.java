@@ -17,9 +17,9 @@ public class IndexController {
 	@Path("/")
 	public void index() {
 	}
-	
+
 	@Post
-	public void add(String title){
+	public void add(String title) {
 		result.redirectTo(CommentsController.class).add(title);
 	}
 }

@@ -1,14 +1,29 @@
-<!DOCTYPE>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="Comente sobre" />
+<meta name="author" content="Karen Zamlutti" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Bootstrap -->
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 <title>Comente sobre</title>
 </head>
 <body>
-	<h1>Sobre o que você deseja comentar?</h1>
-	<form action="${linkTo[IndexController].add}" method="post">
-	    <input type="text" name="title" />
-	    <input type="submit" value="Ir" />
-	</form>
+	<header>
+		<h1>Comente sobre...</h1>
+	</header>
+	<div class="container">
+		<form action="${linkTo[IndexController].add}" method="post">
+			<fieldset>
+				<legend>Sobre o que você deseja comentar?</legend>
+				<input type="text" name="title" placeholder="Tópico" /> 
+				<br>
+				<input type="submit" class="btn"
+					value="Comentar" />
+			</fieldset>
+		</form>
+	</div>
 </body>
 </html>
