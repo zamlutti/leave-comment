@@ -24,7 +24,7 @@
 					<input id="email" type="email" name="email" placeholder="Email" />
 				</div>
 				<div class="control-group">
-					<textarea id="comment" name="comment"></textarea>
+					<textarea id="comment" name="text"></textarea>
 				</div>
 				<input type="submit" class="btn" value="Postar">
 			</fieldset>

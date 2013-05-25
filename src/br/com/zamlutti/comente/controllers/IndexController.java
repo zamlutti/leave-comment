@@ -1,16 +1,16 @@
-package main.java.br.com.zamlutti.comente.controllers;
+package br.com.zamlutti.comente.controllers;
 
-import main.java.br.com.zamlutti.comente.utils.Urlizer;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
+import br.com.zamlutti.comente.utils.Urlizer;
 
 @Resource
 public class IndexController {
 
-    private final Result result;
-    private final Urlizer urlizer;
+    private Result result;
+    private Urlizer urlizer;
 
     public IndexController(Result result, Urlizer urlizer) {
         this.result = result;
@@ -23,7 +23,7 @@ public class IndexController {
 
     @Post
     public void add(String title) {
-        result.redirectTo(CommentsController.class).add(
-                urlizer.urlize(title, '-'));
+        String urlizedTitle = this.urlizer.urlize(title, '-');
+        this.result.redirectTo(CommentsController.class).add(urlizedTitle);
     }
 }

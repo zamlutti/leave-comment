@@ -1,4 +1,4 @@
-package main.java.br.com.zamlutti.comente.utils;
+package br.com.zamlutti.comente.utils;
 
 import br.com.caelum.vraptor.ioc.Component;
 
