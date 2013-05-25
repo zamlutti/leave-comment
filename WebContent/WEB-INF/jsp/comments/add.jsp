@@ -9,19 +9,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-<title>${title}</title>
+<title>Comente sobre ${title}</title>
 </head>
 <body>
 	<header>
 		<h1>Comente sobre...</h1>
 	</header>
 	<div class="container">
-		<form action="${linkTo[CommentsController].add}" method="post">
+		<form class="form-horizontal"
+			action="${linkTo[CommentsController].add}" method="post">
 			<fieldset>
 				<legend>Escreva um comentário sobre ${title}</legend>
-				<input type="email" name="email" placeholder="Email" /> <br>
-				<textarea name="comment"></textarea>
-				<br> <input type="submit" class="btn" value="Postar">
+				<div class="control-group">
+					<input id="email" type="email" name="email" placeholder="Email" />
+				</div>
+				<div class="control-group">
+					<textarea id="comment" name="comment"></textarea>
+				</div>
+				<input type="submit" class="btn" value="Postar">
 			</fieldset>
 		</form>
 	</div>
