@@ -24,4 +24,5 @@ local.properties
 *.war
 *.ear
 
-
+# Mac files
+.DS_Store

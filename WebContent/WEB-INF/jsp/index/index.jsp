@@ -19,7 +19,7 @@
 			method="post">
 			<fieldset>
 				<legend>Sobre o que você deseja comentar?</legend>
-				<input type="text" name="title" placeholder="Tópico" /> <input
+				<input type="text" name="entry.title" placeholder="Tópico" /> <input
 					type="submit" class="btn left" value="Comentar" />
 			</fieldset>
 		</form>

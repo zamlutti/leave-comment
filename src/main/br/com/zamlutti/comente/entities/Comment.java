@@ -3,8 +3,10 @@ package br.com.zamlutti.comente.entities;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "comments")
 public class Comment {
     @Id
     @GeneratedValue

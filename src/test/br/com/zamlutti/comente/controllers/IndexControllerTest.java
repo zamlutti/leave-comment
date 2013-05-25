@@ -5,6 +5,8 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import br.com.caelum.vraptor.Result;
+import br.com.zamlutti.comente.entities.Entry;
+import br.com.zamlutti.comente.repositories.EntryRepository;
 import br.com.zamlutti.comente.utils.Urlizer;
 
 public class IndexControllerTest {
@@ -13,6 +15,7 @@ public class IndexControllerTest {
     private Result resultMock;
     private Urlizer urlizerMock;
     private CommentsController commentsControllerMock;
+    private EntryRepository entryRepositoryMock;
 
     @Before
     public void setUp() throws Exception {
@@ -30,29 +33,46 @@ public class IndexControllerTest {
                 this.urlizerMock.urlize(Mockito.anyString(), Mockito.anyChar()))
                 .thenReturn("urlized-string");
 
-        this.controller = new IndexController(this.resultMock, this.urlizerMock);
+        // Mock entry repository
+        this.entryRepositoryMock = Mockito.mock(EntryRepository.class);
+
+        this.controller = new IndexController(this.resultMock,
+                this.urlizerMock, this.entryRepositoryMock);
     }
 
     @Test
     public void shouldCallUrlizerWhenAddingEntry() {
-        String title = "Métodos Ágeis";
-        this.controller.add(title);
-        Mockito.verify(this.urlizerMock, Mockito.times(1)).urlize(title, '-');
+        Entry entry = new Entry();
+        entry.setTitle("Métodos Ágeis");
+        this.controller.add(entry);
+        Mockito.verify(this.urlizerMock, Mockito.times(1)).urlize(
+                "Métodos Ágeis", '-');
+    }
+
+    @Test
+    public void shouldSaveEntryOnRepositoryWhenAddingEntry() {
+        Entry entry = new Entry();
+        entry.setTitle("Métodos Ágeis");
+        this.controller.add(entry);
+        Mockito.verify(this.entryRepositoryMock, Mockito.times(1)).save(entry);
     }
 
     @Test
     public void shouldRedirectToCommentsControllerWhenAddingEntry() {
-        String title = "Métodos Ágeis";
-        this.controller.add(title);
+        Entry entry = new Entry();
+        entry.setTitle("Métodos Ágeis");
+        this.controller.add(entry);
         Mockito.verify(this.resultMock, Mockito.times(1)).redirectTo(
                 CommentsController.class);
     }
 
     @Test
     public void shouldRedirectToCommentsControllerAddActionWhenAddingEntry() {
-        String title = "Métodos Ágeis";
-        this.controller.add(title);
+        Entry entry = new Entry();
+        entry.setTitle("Métodos Ágeis");
+        this.controller.add(entry);
         Mockito.verify(this.commentsControllerMock, Mockito.times(1)).add(
                 "urlized-string");
     }
+
 }

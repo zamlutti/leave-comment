@@ -6,14 +6,21 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "entries")
 public class Entry {
     @Id
     @GeneratedValue
     private int id;
     private String title;
     private String url;
+    @OneToMany
+    @JoinTable(name = "entry_comment", joinColumns = @JoinColumn(name = "entry_id"), inverseJoinColumns = @JoinColumn(name = "comment_id"))
     private List<Comment> comments;
 
     public Entry() {
