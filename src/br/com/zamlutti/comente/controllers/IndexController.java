@@ -1,6 +1,7 @@
 package br.com.zamlutti.comente.controllers;
 
 import br.com.caelum.vraptor.Get;
+import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
@@ -22,7 +23,7 @@ public class IndexController {
         this.entryRepository = entryRepository;
     }
 
-    @Get
+    @Path("/")
     public void index() {
     }
 
