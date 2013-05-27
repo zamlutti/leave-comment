@@ -1,7 +1,10 @@
 package br.com.zamlutti.comente.repositories;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.zamlutti.comente.entities.Entry;
@@ -16,17 +19,18 @@ public class EntryRepositoryImp implements EntryRepository {
         this.access = access;
     }
 
-    @Override
-    public Entry find(String url) {
-        // TODO Auto-generated method stub
-        return null;
+    @SuppressWarnings("unchecked")
+	public Entry find(String url) {
+        Session session = this.access.getInstance();
+        List<Entry> results = session.createCriteria(Entry.class)
+        		.add(Restrictions.eq("url", url)).list();
+        return results.isEmpty() ? null: results.get(0);
     }
 
-    @Override
     public void save(Entry entry) {
-        Session session = this.access.getSession();
+        Session session = this.access.getInstance();
         Transaction transaction = session.beginTransaction();
-        session.save(entry);
+        session.saveOrUpdate(entry);
         transaction.commit();
         session.close();
     }

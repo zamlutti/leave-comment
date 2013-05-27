@@ -16,19 +16,25 @@
 		<h1>Comente sobre...</h1>
 	</header>
 	<div class="container">
-		<form class="form-horizontal"
-			action="${linkTo[CommentsController].add}" method="post">
-			<fieldset>
-				<legend>Escreva um comentário sobre ${title}</legend>
-				<div class="control-group">
-					<input id="email" type="email" name="comment.email" placeholder="Email" />
-				</div>
-				<div class="control-group">
-					<textarea id="comment" name="comment.text"></textarea>
-				</div>
-				<input type="submit" class="btn" value="Postar">
-			</fieldset>
-		</form>
+		<section>
+			<form class="form-horizontal"
+				action="${linkTo[CommentsController].add}" method="post">
+				<fieldset>
+					<legend>Escreva um comentário sobre ${title}</legend>
+					<div class="control-group">
+						<input id="email" type="email" name="comment.email"
+							placeholder="Email" />
+					</div>
+					<div class="control-group">
+						<textarea id="comment" name="comment.text"></textarea>
+					</div>
+					<input type="submit" class="btn" value="Postar">
+				</fieldset>
+			</form>
+		</section>
+		<section>
+		<h2>Dizem por aí...</h2>
+		</section>
 	</div>
 </body>
 </html>

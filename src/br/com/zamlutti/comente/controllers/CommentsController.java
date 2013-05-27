@@ -1,6 +1,6 @@
 package br.com.zamlutti.comente.controllers;
 
-import br.com.caelum.vraptor.Path;
+import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
@@ -13,7 +13,7 @@ public class CommentsController {
         this.result = result;
     }
 
-    @Path("/{title}")
+    @Get("/{title}")
     public void add(String title) {
         this.result.include("title", title);
     }
