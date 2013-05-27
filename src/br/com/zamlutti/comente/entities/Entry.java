@@ -19,8 +19,8 @@ public class Entry {
     private int id;
     private String title;
     private String url;
+
     @OneToMany
-    @JoinTable(name = "entry_comment", joinColumns = @JoinColumn(name = "entry_id"), inverseJoinColumns = @JoinColumn(name = "comment_id"))
     private List<Comment> comments;
 
     public Entry() {
