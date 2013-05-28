@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,16 +10,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="css/base.css" rel="stylesheet" media="screen">
 <title>Comente sobre ${entry.title}</title>
 </head>
 <body>
 	<header>
-		<h1>Comente sobre...</h1>
+		<i class="icon-comment"></i>
+		<span>Comente sobre...</span>
 	</header>
 	<div class="container">
 		<section>
 			<form class="form-horizontal"
-				action="${linkTo[CommentsController].add}" method="post">
+				action="${linkTo[CommentsController].save}" method="post">
 				<fieldset>
 					<legend>Escreva um comentário sobre ${entry.title}</legend>
 					<div class="control-group">
@@ -28,8 +31,8 @@
 					<div class="control-group">
 						<textarea id="comment" name="comment.text"></textarea>
 					</div>
-					<input type="hidden" name="url" value="${entry.url}" />
-					<input type="submit" class="btn" value="Postar">
+					<input type="hidden" name="comment.entry" value="${entry}" />
+					<input type="submit" class="btn" value="Postar" />
 				</fieldset>
 			</form>
 		</section>
@@ -38,10 +41,11 @@
 			<ul>
 				<c:forEach var="comment" items="${entry.comments}">
 					<li>
-						<b><c:out value="${comment.email}" /></b>
-						<p>
+						<i class="icon-comment"></i>
+						<cite><c:out value="${comment.email}" /></cite>						
+						<blockquote>
 							<c:out value="${comment.text}" />
-						</p>
+						</blockquote>
 					</li>
 				</c:forEach>
 			</ul>
