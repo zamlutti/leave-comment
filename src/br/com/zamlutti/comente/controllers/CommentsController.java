@@ -11,9 +11,9 @@ import br.com.zamlutti.comente.repositories.EntryRepository;
 
 @Resource
 public class CommentsController {
-	private Result result;
-	private EntryRepository entryRepository;
-	private CommentRepository commentRepository;
+	private final Result result;
+	private final EntryRepository entryRepository;
+	private final CommentRepository commentRepository;
 
 	public CommentsController(Result result, EntryRepository entryRepository,
 			CommentRepository commentRepository) {
@@ -24,13 +24,14 @@ public class CommentsController {
 
 	@Get("/{url}")
 	public void add(String url) {
-		Entry entry = entryRepository.find(url);
+		Entry entry = this.entryRepository.find(url);
 		this.result.include("entry", entry);
 	}
 
 	@Post
-	public void save(Comment comment, String url) {
-		commentRepository.save(comment);
-		this.result.redirectTo(CommentsController.class).add(url);
+	public void save(Comment comment) {
+		this.commentRepository.save(comment);
+		Entry entry = comment.getEntry();
+		this.result.redirectTo(CommentsController.class).add(entry.getUrl());
 	}
 }
