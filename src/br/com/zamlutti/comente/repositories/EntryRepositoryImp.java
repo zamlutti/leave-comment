@@ -2,9 +2,11 @@ package br.com.zamlutti.comente.repositories;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.SimpleExpression;
 
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.zamlutti.comente.entities.Entry;
@@ -22,8 +24,9 @@ public class EntryRepositoryImp implements EntryRepository {
 	@SuppressWarnings("unchecked")
 	public Entry find(String url) {
 		Session session = this.access.getInstance();
-		List<Entry> results = session.createCriteria(Entry.class)
-				.add(Restrictions.eq("url", url)).list();
+		SimpleExpression byUrl = Restrictions.eq("url", url);
+		Criteria criteria = session.createCriteria(Entry.class).add(byUrl);
+		List<Entry> results = criteria.list();
 		return results.isEmpty() ? null : results.get(0);
 	}
 
