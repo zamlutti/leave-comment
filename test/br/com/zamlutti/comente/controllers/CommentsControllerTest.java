@@ -18,6 +18,7 @@ public class CommentsControllerTest {
 	private CommentRepository commentRepositoryMock;
 	private Entry entry;
 	private CommentsController commentsControllerMock;
+	private Comment comment;
 
 	@Before
 	public void setUp() throws Exception {
@@ -30,9 +31,9 @@ public class CommentsControllerTest {
 				.thenReturn(this.commentsControllerMock);
 
 		// Mock entry repository
-		this.entryRepositoryMock = Mockito.mock(EntryRepository.class);
 		this.entry = new Entry();
 		this.entry.setUrl(ENTRY_URL);
+		this.entryRepositoryMock = Mockito.mock(EntryRepository.class);
 		Mockito.when(this.entryRepositoryMock.find(Mockito.anyString()))
 				.thenReturn(this.entry);
 
@@ -41,6 +42,9 @@ public class CommentsControllerTest {
 
 		this.controller = new CommentsController(this.resultMock,
 				this.entryRepositoryMock, this.commentRepositoryMock);
+
+		this.comment = new Comment();
+		this.comment.setEntry(this.entry);
 	}
 
 	@Test
@@ -58,19 +62,22 @@ public class CommentsControllerTest {
 	}
 
 	@Test
+	public void shouldRetrieveEntryWhenSavingComment() {
+		this.controller.save(this.comment);
+		Mockito.verify(this.entryRepositoryMock, Mockito.times(1)).find(
+				ENTRY_URL);
+	}
+
+	@Test
 	public void shouldSaveCommentOnRepositoryWhenSavingComment() {
-		Comment comment = new Comment();
-		comment.setEntry(this.entry);
-		this.controller.save(comment);
+		this.controller.save(this.comment);
 		Mockito.verify(this.commentRepositoryMock, Mockito.times(1)).save(
-				comment);
+				this.comment);
 	}
 
 	@Test
 	public void shouldRedirectToAddActionAfterSavingComment() {
-		Comment comment = new Comment();
-		comment.setEntry(this.entry);
-		this.controller.save(comment);
+		this.controller.save(this.comment);
 		Mockito.verify(this.resultMock, Mockito.times(1)).redirectTo(
 				CommentsController.class);
 	}
