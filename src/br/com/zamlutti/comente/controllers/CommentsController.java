@@ -30,8 +30,10 @@ public class CommentsController {
 
 	@Post
 	public void save(Comment comment) {
+		String url = comment.getEntry().getUrl();
+		Entry entry = this.entryRepository.find(url);
+		comment.setEntry(entry);
 		this.commentRepository.save(comment);
-		Entry entry = comment.getEntry();
-		this.result.redirectTo(CommentsController.class).add(entry.getUrl());
+		this.result.redirectTo(CommentsController.class).add(url);
 	}
 }

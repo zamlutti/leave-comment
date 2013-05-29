@@ -11,7 +11,7 @@
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="css/base.css" rel="stylesheet" media="screen">
-<title>Comente sobre ${entry.title}</title>
+<title>Comente sobre <c:out value="${entry.title}" /></title>
 </head>
 <body>
 	<header>
@@ -23,7 +23,7 @@
 			<form class="form-horizontal"
 				action="${linkTo[CommentsController].save}" method="post">
 				<fieldset>
-					<legend>Escreva um comentário sobre ${entry.title}</legend>
+					<legend>Escreva um comentário sobre <c:out value="${entry.title}" /></legend>
 					<div class="control-group">
 						<input id="email" type="email" name="comment.email"
 							placeholder="Email" />
@@ -31,7 +31,7 @@
 					<div class="control-group">
 						<textarea id="comment" name="comment.text"></textarea>
 					</div>
-					<input type="hidden" name="comment.entry" value="${entry}" />
+					<input type="hidden" name="comment.entry.url" value="${entry.url}" />
 					<input type="submit" class="btn" value="Postar" />
 				</fieldset>
 			</form>
@@ -41,7 +41,6 @@
 			<ul>
 				<c:forEach var="comment" items="${entry.comments}">
 					<li>
-						<i class="icon-comment"></i>
 						<cite><c:out value="${comment.email}" /></cite>						
 						<blockquote>
 							<c:out value="${comment.text}" />

@@ -30,8 +30,12 @@ public class IndexController {
 	public void add(Entry entry) {
 		String title = entry.getTitle();
 		String url = this.urlizer.urlize(title, '-');
-		entry.setUrl(url);
-		this.entryRepository.save(entry);
+		Entry entryFound = this.entryRepository.find(url);
+		if (entryFound == null) {
+			entry.setUrl(url);
+			this.entryRepository.save(entry);
+		}
+
 		this.result.redirectTo(CommentsController.class).add(url);
 	}
 }

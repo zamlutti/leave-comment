@@ -19,7 +19,7 @@ public class CommentRepositoryImp implements CommentRepository {
 	public void save(Comment comment) {
 		Session session = this.access.getInstance();
 		Transaction transaction = session.beginTransaction();
-		session.save(comment);
+		session.saveOrUpdate(comment);
 		transaction.commit();
 	}
 
