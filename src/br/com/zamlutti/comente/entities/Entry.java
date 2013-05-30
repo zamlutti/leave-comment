@@ -11,13 +11,17 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Table(name = "entries", uniqueConstraints = { @UniqueConstraint(columnNames = { "url" }) })
 public class Entry {
 	@Id
 	@GeneratedValue
 	private int id;
-	@Column(nullable = false)
+	@NotEmpty
+	@Length(min = 2, max = 50, message = "Tópico deve ter entre 2 e 50 caracteres")
 	private String title;
 	@Column(nullable = false)
 	private String url;

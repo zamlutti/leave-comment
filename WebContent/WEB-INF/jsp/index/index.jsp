@@ -7,6 +7,11 @@
 		<i class="icon-comment"></i> <span>Comente sobre...</span>
 	</header>
 	<div class="container">
+		<ul class="unstyled">
+			<c:forEach items="${errors}" var="error">
+				<li class="text-error">${error.message }</li>
+			</c:forEach>
+		</ul>
 		<form class="form-inline" action="${linkTo[IndexController].add}"
 			method="post">
 			<fieldset>
@@ -19,7 +24,7 @@
 		</form>
 	</div>
 	<footer>
-        <span>&copy; 2013 - Karen Dias Zamlutti.</span>
+		<span>&copy; 2013 - Karen Dias Zamlutti.</span>
 	</footer>
 </body>
 
