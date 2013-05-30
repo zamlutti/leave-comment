@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.Validator;
 import br.com.zamlutti.comente.entities.Comment;
 import br.com.zamlutti.comente.entities.Entry;
 import br.com.zamlutti.comente.repositories.CommentRepository;
@@ -19,11 +20,15 @@ public class CommentsControllerTest {
 	private Entry entry;
 	private CommentsController commentsControllerMock;
 	private Comment comment;
+	private Validator validatorMock;
 
 	@Before
 	public void setUp() throws Exception {
 		// Mock comments controller
 		this.commentsControllerMock = Mockito.mock(CommentsController.class);
+
+		// Mock validator
+		this.validatorMock = Mockito.mock(Validator.class);
 
 		// Mock result
 		this.resultMock = Mockito.mock(Result.class);
@@ -41,10 +46,18 @@ public class CommentsControllerTest {
 		this.commentRepositoryMock = Mockito.mock(CommentRepository.class);
 
 		this.controller = new CommentsController(this.resultMock,
-				this.entryRepositoryMock, this.commentRepositoryMock);
+				this.validatorMock, this.entryRepositoryMock,
+				this.commentRepositoryMock);
 
 		this.comment = new Comment();
 		this.comment.setEntry(this.entry);
+	}
+
+	@Test
+	public void shouldValidateCommentWhenAddingComment() {
+		this.controller.add(ENTRY_URL);
+		Mockito.verify(this.validatorMock, Mockito.times(1)).validate(
+				this.comment);
 	}
 
 	@Test

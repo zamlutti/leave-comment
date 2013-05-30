@@ -8,6 +8,11 @@
 	</header>
 	<div class="container">
 		<section>
+			<ul class="unstyled">
+				<c:forEach items="${errors}" var="error">
+					<li class="text-error">${error.message }</li>
+				</c:forEach>
+			</ul>
 			<form class="form-horizontal"
 				action="${linkTo[CommentsController].save}" method="post">
 				<fieldset>
@@ -29,19 +34,21 @@
 		</section>
 		<section>
 			<h3>Dizem por a&iacute;...</h3>
-			<ul>
+			<dl class="dl-horizontal">
 				<c:forEach var="comment" items="${entry.comments}">
-					<li><i class="icon-user"></i><b><c:out value="${comment.email}" /></b>:
-						<blockquote>
-							<c:out value="${comment.text}" />
-						</blockquote></li>
+					<dt>
+						<i class="icon-user"></i>
+						<c:out value="${comment.email}" />
+					</dt>
+					<dd>
+						<c:out value="${comment.text}" />
+					</dd>
 				</c:forEach>
-			</ul>
-
+			</dl>
 		</section>
 	</div>
 	<footer>
-        <span>&copy; 2013 - Karen Dias Zamlutti.</span>
+		<span>&copy; 2013 - Karen Dias Zamlutti.</span>
 	</footer>
 </body>
 </html>

@@ -1,7 +1,6 @@
 package br.com.zamlutti.comente.entities;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -9,15 +8,21 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Table(name = "comments")
 public class Comment {
 	@Id
 	@GeneratedValue
 	private int id;
-	@Column(nullable = false)
+	@NotEmpty(message = "Email não pode ser vazio")
+	@Email(message = "Email inválido")
 	private String email;
-	@Column(nullable = false)
+	@NotEmpty(message = "Comentário não pode ser vazio")
+	@Length(min = 3, max = 255, message = "Comentário deve ter entre 3 e 255 caracteres")
 	private String text;
 	@ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.DETACH })

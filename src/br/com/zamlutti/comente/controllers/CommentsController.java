@@ -4,6 +4,7 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.Validator;
 import br.com.zamlutti.comente.entities.Comment;
 import br.com.zamlutti.comente.entities.Entry;
 import br.com.zamlutti.comente.repositories.CommentRepository;
@@ -14,10 +15,13 @@ public class CommentsController {
 	private final Result result;
 	private final EntryRepository entryRepository;
 	private final CommentRepository commentRepository;
+	private final Validator validator;
 
-	public CommentsController(Result result, EntryRepository entryRepository,
-			CommentRepository commentRepository) {
+	public CommentsController(Result result, Validator validator,
+			EntryRepository entryRepository, CommentRepository commentRepository) {
 		this.result = result;
+		this.validator = validator;
+
 		this.entryRepository = entryRepository;
 		this.commentRepository = commentRepository;
 	}
@@ -30,6 +34,9 @@ public class CommentsController {
 
 	@Post
 	public void save(Comment comment) {
+		this.validator.validate(comment);
+		this.validator.onErrorRedirectTo(CommentsController.class).add(
+				comment.getEntry().getUrl());
 		String url = comment.getEntry().getUrl();
 		Entry entry = this.entryRepository.find(url);
 		comment.setEntry(entry);
