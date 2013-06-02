@@ -1,5 +1,4 @@
 # Eclipse Files #
-*.pydevproject
 .project
 .metadata
 bin/**
@@ -26,3 +25,7 @@ local.properties
 
 # Mac files
 .DS_Store
+
+# Maven files
+target/
+
